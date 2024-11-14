@@ -54,6 +54,11 @@ This device information capture system is built using Python and Flask. It is de
 3. Click the "Send Device Details" button to send your device information to the server.
 4. The server logs will display the collected information.
 
+## Set dat to telegram
+1. deploy `urldata.php` as main page
+2. setup `Telegram bot token` & `Chat ID` to get message
+3. run & share `Urldata.php`
+
 ## API Endpoints
 
 ### `/`
